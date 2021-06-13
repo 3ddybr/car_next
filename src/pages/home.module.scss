@@ -1,0 +1,58 @@
+.container{
+  // background:rgb(88, 88, 167);
+  // border: 1px solid red;
+  
+  max-width:900px;
+  margin: 0 auto;
+    
+
+  display:flex;
+  align-items:center;
+  flex-direction: column;
+
+.mainContainer{
+  // border: 1px solid rgb(192, 45, 160);
+
+  width: 100vw;
+  max-width:900px;
+  display: grid;
+  grid-template-columns:1fr 1fr;
+
+  gap:2rem;
+
+// justify-content:center;  
+  
+  margin-top: 1rem;
+
+
+  img{
+    margin-top:1rem;
+    width:28.125rem;
+    height:18.75rem;
+  }
+
+ article{
+  
+   margin: 1rem 0;
+   font-size: 1rem;
+
+   h1 {
+     font: 1.2rem;
+     display: flex;
+     align-items: center;
+     
+     text-align: center;
+
+     height:3.375rem;
+    //  justify-content: center;
+   }
+
+   p{
+     width:28.125rem;
+   }
+
+ }
+
+}
+}
+

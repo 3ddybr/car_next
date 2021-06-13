@@ -1,0 +1,68 @@
+*{ //todos os elementos 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --white:#ffffff;
+
+    --gray-100:#e1e1e6;
+    --gray-300:#a8a8b3;
+    --gray-800:#29292e;
+    --gray-850:#1f2729;
+    --gray-900:#121214;
+
+    --cyan-500: #61d1fb;
+    --yellow-500: #eba417;
+
+    // font-size:90%;
+}
+// body {
+//     min-height:100vh;
+// }
+// html, body{
+//     height: 100vh;
+//     height:100%;
+// }
+
+@media (max-width:3000px) {
+    
+    html{
+        font-size: 93.75%;
+    }
+}
+
+@media (max-width:720px) {
+    html{
+        font-size: 87.5%;
+    }
+}
+
+html, body {
+    background: var(--cyan-500);
+    // background:green;
+    color: var(--gray-900);
+    height: 100vh;
+    width: 100vw;
+}
+
+body, form, input, textarea, select, button {
+    font: 400 1rem "Roboto", sans-serif;
+}
+
+// html,body,body> 
+// div:first-child,       
+// div#__next,       
+// div#__next >
+// div { height: 100%;}
+
+
+button{
+    cursor: pointer;
+}
+
+a{
+    color: inherit; // poe a cor do link a mesma do elemento pai
+    text-decoration:none; //tirar o underline dos links
+}

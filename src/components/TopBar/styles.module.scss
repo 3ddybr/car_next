@@ -1,0 +1,59 @@
+.headerContainer{
+    height:3rem;
+    // position: fixed;
+    // border: 1px solid gray;
+}
+
+.headerContent{
+    max-width: 900px;
+    // border: 1px solid red;
+    height:3rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content:flex-end;
+    
+
+    nav{
+        margin-left: 5rem;
+        height:3rem;
+        display: flex;
+        text-align:left;
+        a {          
+            display:inline-block;
+            position: relative;
+            
+            padding: 0 0.5rem;
+            height:3rem;
+            line-height: 3rem;
+            color: var(--gray-800);
+
+            transition: color 0.2s;
+
+            & + a { //toda ancora que antes dela tem outra aplicar a margin
+                margin-left:1rem;
+            }
+
+            &:hover {  // quando passam mouse por cima troca pra essa cor
+                color: var(--white);
+            }
+
+            &.active{
+                color: var(--white);
+                font-weight:bold;
+            }
+            &.active::after{
+                content:'';
+                height:3px;
+                border-radius: 3px 3px 0 0 ;
+                width:100%;
+                position:absolute;
+                bottom:1px;
+                left: 0;
+                background: var(--yellow-500);
+            }
+        }
+    }
+}

@@ -1,0 +1,60 @@
+.containerContato{
+    display: flex;
+    // flex:1;    
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
+    max-width:900px;
+
+    margin: 0 auto;
+    margin-top:2rem;
+    
+
+    // border: 1px solid green;
+
+    img{
+        max-width: 46.75rem;
+    }
+
+    .formContato {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 700px;
+        margin-bottom:5rem;
+        // border: 1px solid red;
+
+        form{        
+            width:100vw;
+            max-width: 46.75rem;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            input, button, textarea {
+                box-sizing: border-box;
+               
+                width:46.75rem;
+                height:2.5rem;
+                border-radius: .5rem;
+                // margin-top: 1rem;
+                // margin-bottom: 3rem;
+                
+            }
+
+            textarea{
+                margin-top: 1rem;
+                resize:vertical;
+                min-height:10rem;                
+                outline: 0;
+            }
+            button{
+                margin-bottom: 1rem;
+            }
+           
+        }   
+    }
+
+}
+
