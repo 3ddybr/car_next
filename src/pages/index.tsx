@@ -7,19 +7,17 @@ export default function Home() {
       <h1>DESTAQUES</h1>
         <main className={styles.mainContainer}>
             <article>
-                <h1>Modelo GM - CHEVROLET COBALT LTZ 1.4 8V FLEXPOWER/ECONOFLEX 4P</h1>
+
+                <h1>{}</h1>
                 <img src="/images/car/cobalt.jpg" alt="cobalt"/>
                 <p>Marca
                             GM - CHEVROLET</p>
                 <p>Ano 2015</p>
                 <p>Quilometragem 81000</p>
-                <p>Potência do motor
-                            1.4</p>
-                <p>Cor
-                            Prata
-                        </p>
-                <p>Descricao:
-                            Vendo troco finacio em até 60x para aposentados 
+                <p>Potência do motor 1.4</p>
+                <p>Cor Prata</p>
+                <p>Descrição:
+                            Vendo troco financio em até 60x para aposentados 
                             pensionista autônomos setor privado empréstimo 
                             consignado carta de crédito etc. Financiamos o seu
                             óprio  veículos fazemos refinanciamento. Pegamos o 

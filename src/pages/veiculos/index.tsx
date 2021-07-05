@@ -1,6 +1,7 @@
 import React from 'react';
-import SelectMarca from '../../components/SelectMarca';
-import SelectTipo from '../../components/SelectTipo';
+import SelectTiposMarcas from '../../components/SelectTiposMarcas';
+import { dataMarcas } from '../../utils/dataMarcas';
+import { dataTipos } from '../../utils/dataTipoCarros';
 import styles from './styles.module.scss';
 
 export default function Veiculos (){
@@ -14,8 +15,8 @@ export default function Veiculos (){
                     </label>
                 </div>
 
-                <SelectTipo/>
-                <SelectMarca/>
+                <SelectTiposMarcas dataOptions={dataTipos}/>
+                <SelectTiposMarcas dataOptions={dataMarcas}/>
 
                 <label>Modelo</label>
                 <input></input>
@@ -60,14 +61,11 @@ export default function Veiculos (){
             </div>
                 <label>Preço</label>
                 <input></input>
-                <label>Descricao</label>
+                <label>Descrição</label>
                 <textarea></textarea>
                 <button>Inserir</button>
-                <button>Exluir</button>
-
-
-            </form>
-            
+                <button>Excluir</button>
+            </form>            
         </div>
 
 

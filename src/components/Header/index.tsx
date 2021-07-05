@@ -1,6 +1,9 @@
-import SelectMarca from '../SelectMarca';
-import SelectTipo from '../SelectTipo';
+import SelectTiposMarcas from '../SelectTiposMarcas';
+
+import { dataMarcas } from '../../utils/dataMarcas';
+import { dataTipos } from '../../utils/dataTipoCarros';
 import styles from './styles.module.scss';
+
 
 export function Header (){
     return(
@@ -16,13 +19,11 @@ export function Header (){
 
             <div className={styles.formContainer}>
                 <form action="">
-                    <SelectTipo/>
-                    <SelectMarca/>
+                    <SelectTiposMarcas dataOptions={dataTipos}/>
+                    <SelectTiposMarcas dataOptions={dataMarcas}/>
                     <button type="submit">Filtrar</button>
                 </form>
             </div>
-        </header>
-        
-        
+        </header>    
     )
 } 

@@ -6,10 +6,11 @@ import { TopBar } from '../components/TopBar';
 
 import '../styles/global.scss';
 
+import '../services/firebase'
+
 function MyApp({ Component, pageProps }:AppProps) {
   return (
-    <>
-    
+    <>    
     <Head>
       <title>AUTO FEST CAR</title>
     </Head>
