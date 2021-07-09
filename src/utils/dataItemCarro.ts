@@ -1,9 +1,11 @@
 type DataItemCarroProps = {
     title: string;
-    img:string;    
+    img:string;
+    type?: string;
     brand:string;  //marca
+    model?:string;
     year:string;    //ano
-    mileage:string; //quilometragem    
+    mileage:string; //quilometragem
     power:string;  //potencia
     color:string;
     description:string;
@@ -15,7 +17,7 @@ export const dataItemCarro: DataItemCarroProps[] = [
         title: "Modelo GM - CHEVROLET COBALT LTZ 1.4 8V FLEXPOWER/ECONOFLEX 4P",
         img: "/images/car/cobalt.jpg",
         brand: "GM - CHEVROLET",
-        year: "2015",        
+        year: "2015",
         mileage: "81000",
         power: "1.4",
         color: "Prata",
