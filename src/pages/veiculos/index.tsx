@@ -2,12 +2,14 @@ import React from 'react';
 import {FormEvent} from 'react'
 import SelectTiposMarcas from '../../components/SelectTiposMarcas';
 import { dataMarcas } from '../../utils/dataMarcas';
-import { dataTipos } from '../../utils/dataTipoCarros';
+import { dataTiposCarros } from '../../utils/dataTipoCarros';
 import styles from './styles.module.scss';
 
 import {useForm} from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
-import { firebase } from '../../services/firebase'
+import { database } from '../../services/firebase'
 
 type FormData = {
     destaque:boolean,
@@ -34,33 +36,58 @@ type FormData = {
       ar_condicionado?:boolean,
     }
 }
+
+const schema = yup.object().shape({
+    destaque:yup.boolean(),
+
+    title:  yup.string().required('Titulo e obrigatório'),
+    // img: yup.string().required(),
+
+    // type:  yup.string().required(),
+    // brand: yup.string().required(),  //marca
+
+    model: yup.string().required('Modelo e obrigatório'),
+    version_car: yup.string().required('Versão e obrigatório'),
+    year_model: yup.string().required('Ano Modelo/ Fabricação e obrigatório'),    //ano/model
+    mileage: yup.string().required('Quilometragem e obrigatório'), //quilometragem
+    // power: yup.string().required('Potencia e obrigatório'),  //potencia
+    color_car: yup.string().required('Cor e obrigatório'),
+    price:yup.string().required('Preço e obrigatório'),
+    description:yup.string().required('Descrição e obrigatório'),
+
+      alarme: yup.boolean(),
+      trava_eletrica:yup.boolean(),
+      som:yup.boolean(),
+      direcao_hidraulica:yup.boolean(),
+      vidro_eletrico:yup.boolean(),
+      airbag:yup.boolean(),
+      ar_condicionado:yup.boolean(),
+
+})
+
 export default function Veiculos (){
 
-  const {register, handleSubmit, setError, setValue, getValues} = useForm<FormData>();
+  const {register, handleSubmit, setError, setValue, getValues, formState:{errors} } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-
-
-  const handleSubmitForm = async (event: FormEvent) => {
-    event.preventDefault();
-    // const db = firebase.firestore();
-
-    // const vehiclesRef = db.collection('vehicles')
-    // // console.log(`aqui esta `,vehiclesRef)
-    // try {
-    //   // const doc = await vehiclesRef.add({title:`teste`})
-    //   const doc = await vehiclesRef.add({handleSubmit})
-    //   console.log('Documento escrito com id: ', doc.id)
-    // } catch (error) {
-    //   console.error("Error adding document: ", error);
-    // }
+  const handleSubmitForm = async (data) => {
+    console.log(data)
+    // event.preventDefault();
+      // console.log(event);
+    const vehiclesRef = database.collection('vehicles')
+    // console.log(`aqui esta `,vehiclesRef)
+    try {
+      const doc = await vehiclesRef.add({data})
+      console.log('Documento escrito com id: ', doc.id)
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
   }
-
-
     return (
         <div className={styles.veiculosContainer}>
-          {/* <button title='buscar' onClick={handleSubimitForm}>clickme</button> */}
 
-            <form onSubmit={handleSubmitForm}>
+            <form onSubmit={handleSubmit(handleSubmitForm)}>
                 <div className={styles.opcionais}>
                     <input type="checkbox" id="destaque" {...register("destaque")}/>
                     <label>
@@ -71,35 +98,47 @@ export default function Veiculos (){
                 <input
                   {...register("title")}
                 />
+                <p>{errors.title?.message}</p>
 
-                <SelectTiposMarcas dataOptions={dataTipos} {...register("type")}/>
+                {/* <SelectTiposMarcas dataOptions={dataTiposCarros} {...register("type")}/>
                 <SelectTiposMarcas dataOptions={dataMarcas} {...register("brand")}/>
+                  */}
 
                 <label>Modelo</label>
                 <input
                   {...register("model")}
                   id="model"
                 />
+                <p>{errors.model?.message}</p>
+
                 <label>Versão</label>
                 <input
                   {...register("version_car")}
                   id="version_car"
                 />
+                <p>{errors.version_car?.message}</p>
+
                 <label>Ano Modelo / Fabricação</label>
                 <input
                   {...register("year_model")}
                   id="year_model"
                 />
-                <label>Quilometragem</label>
+                <p>{errors.year_model?.message}</p>
+
+                 <label>Quilometragem</label>
                 <input
                   {...register("mileage")}
                   id="mileage"
                 />
+                <p>{errors.mileage?.message}</p>
+
                 <label>Cor</label>
                 <input
                   {...register("color_car")}
                   id="color_car"
                 />
+                <p>{errors.color_car?.message}</p>
+
                 <legend>OPCIONAIS</legend>
                 <div className={styles.fieldOpcionais}>
                     <div>
@@ -131,12 +170,17 @@ export default function Veiculos (){
                     <label>AR CONDICIONADO</label>
                 </div>
             </div>
+
                 <label>Preço</label>
                 <input
                   {...register("price")}
                 />
+                <p>{errors.price?.message}</p>
+
                 <label>Descrição</label>
-                <textarea {...register("description")}></textarea>
+                <textarea {...register("description")}/>
+                  <p>{errors.description?.message}</p>
+
                 <button type="submit" >Inserir</button>
                 <button>Excluir</button>
             </form>

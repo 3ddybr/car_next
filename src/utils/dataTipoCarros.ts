@@ -1,4 +1,4 @@
-export const dataTipos = [
+export const dataTiposCarros = [
     {
         value : "",
         label : "Tipo",
