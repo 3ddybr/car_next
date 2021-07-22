@@ -4,15 +4,15 @@ export const dataTiposCarros = [
         label : "Tipo",
     },
     {
-        value : "t1",
+        value : "Carro",
         label : "Carro",
     },
     {
-        value : "t2",
+        value : "Moto",
         label : "Moto",
     },
     {
-        value : "t3",
+        value : "Outros",
         label : "Outros",
     },
 ];

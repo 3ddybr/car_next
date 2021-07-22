@@ -1,6 +1,6 @@
 # car_next
 
-# react-hook-form ou formik
+# react-hook-form com yup
 # @hookform/resolvers
 
 # yup
