@@ -1,4 +1,4 @@
-*{ //todos os elementos 
+*{ //todos os elementos
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -27,7 +27,7 @@
 // }
 
 @media (max-width:3000px) {
-    
+
     html{
         font-size: 93.75%;
     }
@@ -51,9 +51,9 @@ body, form, input, textarea, select, button {
     font: 400 1rem "Roboto", sans-serif;
 }
 
-// html,body,body> 
-// div:first-child,       
-// div#__next,       
+// html,body,body>
+// div:first-child,
+// div#__next,
 // div#__next >
 // div { height: 100%;}
 

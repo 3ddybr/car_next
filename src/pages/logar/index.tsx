@@ -1,15 +1,11 @@
-import { error } from 'console';
 import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
 
-import { useForm } from 'react-hook-form';
-import { database } from '../../services/firebase';
 import styles from './styles.module.scss';
 
-type FormData= {
-  email: string;
-  password: string;
-}
+import {addDoc, collection, getDocs} from 'firebase/firestore'
+import { firestoreDB} from '../../services/firebase';
+
 
 export default function Logar (){
   // const {} = useForm<FormData>()
@@ -18,48 +14,49 @@ export default function Logar (){
 
   const router= useRouter()
 
-  //funcao para criar o usuario no db tabela users
+// funcao para criar o usuario no db tabela users
+  async function handleSubmit (event:FormEvent) {
+    event.preventDefault();
+    const usersCol = collection(firestoreDB, 'users');
+    addDoc(usersCol ,{
+      email:email,
+      password:password
+    })
+    setEmail("");
+    setPassword("");
+  };
+//Termina funcao para criar o usuario no db tabela users
 
-  // async function handleSubmit (event:FormEvent) {
-  //   event.preventDefault();
-
-  //   database.collection("users")
-  //   .add({
-  //     email:email,
-  //     password:password
-  //   })
-
-  //   setEmail("");
-  //   setPassword("");
-
-  // };
-// console.log(email,password);
-
+//funcao para login---------------
 async function SignIn (event: FormEvent) {
   event.preventDefault();
 
+    const usersCol = collection(firestoreDB, 'users');
+    const userSnapshot = await getDocs(usersCol);
+    const userList = userSnapshot.docs.map(doc => doc.data());
+    console.log(userList)
+
+
   if (email === "" || password === "" ){
-    return;
-  }
-  await database.collection("users").get().then((querySnapshot) =>{
-    querySnapshot.forEach((doc)=> {
-      if (doc.data().email === email){
-        if (doc.data().password ===password){
+    return ;
+  }else{
+    userList.forEach(function(valor) {
+      if (valor.email === email){
+        if(valor.password === password){
           return(
-            // se usuário autenticado direciona para a pagina de inserir veículos
+          // se usuário autenticado direciona para a pagina de inserir veículos
             router.push(`/veiculos`)
           )
         }
       }
-      // console.log(doc.id, "==", doc.data().email)
+        // console.log("Console Log email aquii  ", "email ",valor.email, "senha ",valor.password)
     })
-
-  })
+  }
 }
+//termina funcao para login ---------------
+
   return (
-
     <div className={styles.containerLogar}>
-
       <div className={styles.formContainerLogar}>
         <h1>LOGAR</h1>
         <form onSubmit={SignIn}>
@@ -68,8 +65,8 @@ async function SignIn (event: FormEvent) {
           placeholder="E-mail"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-
           />
+
           <input
           type="password"
           placeholder="Senha"
@@ -83,3 +80,28 @@ async function SignIn (event: FormEvent) {
 
     )
   }
+
+
+
+
+  // async function SignIn (event: FormEvent) {
+  //   event.preventDefault();
+
+  //   if (email === "" || password === "" ){
+  //     return;
+  //   }
+  //   await database.collection("users").get().then((querySnapshot) =>{
+  //     querySnapshot.forEach((doc)=> {
+  //       if (doc.data().email === email){
+  //         if (doc.data().password === password){
+  //           return(
+  //             // se usuário autenticado direciona para a pagina de inserir veículos
+  //             router.push(`/veiculos`)
+  //           )
+  //         }
+  //       }
+  //       // console.log(doc.id, "==", doc.data().email)
+  //     })
+
+  //   })
+  // }

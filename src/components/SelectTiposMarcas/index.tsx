@@ -10,7 +10,6 @@ interface PropsSelect {
 }
 
 export default function SelectTiposMarcas ({dataOptions, name, control}:PropsSelect) {
-
   return (
         <Controller
           render={({field})=>{

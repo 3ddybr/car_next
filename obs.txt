@@ -4,5 +4,5 @@ Swiper
 Por fim, como o Chakra UI não possui ainda um componente de slides/carousel, deixamos como sugestão a lib Swiper para implementar essa funcionalidade apresentada na página Home.
 
 
-usar o miragejs para porver uma api fake enquanto nao controi o DB
+usar o miragejs para prover uma api fake enquanto nao controi o DB
 

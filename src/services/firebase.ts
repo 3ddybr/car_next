@@ -1,7 +1,39 @@
-import firebase from 'firebase/app'
-// import 'firebase/auth';  se eu for usar o autenticação
-import 'firebase/database'
-import 'firebase/firestore'
+
+//Importacoes do Firebase-----------------------
+import {initializeApp} from 'firebase/app'
+import {
+  getAuth,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from 'firebase/auth';
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  limit,
+  onSnapshot,
+  setDoc,
+  updateDoc,
+  doc,
+  serverTimestamp,
+  getDocs,
+} from 'firebase/firestore';
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  uploadString,
+  list
+} from 'firebase/storage'
+
+import {} from 'firebase/database'
+//Termina aqui importacoes do firebase-----------
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_REACT_APP_API_KEY,
@@ -13,10 +45,9 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID
 }
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig)
-}
-// export const auth = firebase.auth();
-const database = firebase.firestore()
+const firebaseApp = initializeApp(firebaseConfig)
+export const firestoreDB = getFirestore(firebaseApp)
+export const storage = getStorage(firebaseApp)
 
-export { firebase, database}
+//Fim importacao do Firebase -----------------------------
+

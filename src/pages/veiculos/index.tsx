@@ -8,7 +8,8 @@ import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
-import { database } from '../../services/firebase'
+import {firestoreDB } from '../../services/firebase'
+import { addDoc, collection } from 'firebase/firestore';
 
 type FormData = {
     destaque:boolean,
@@ -69,15 +70,13 @@ export default function Veiculos (){
   const {register, handleSubmit,  control , formState:{errors} } = useForm({
     resolver: yupResolver(schema),
   });
-  // console.log(control)
+
+//funcao submit do formulario para a tabela veiculos
   const handleSubmitForm = async (data: FormData) => {
-    // console.log("daddos vem aquiiiii",data)
-    // event.preventDefault();
-      // console.log(event);
-    const vehiclesRef = database.collection('vehicles')
-    // console.log(`aqui esta `,vehiclesRef)
+
+    const vehiclesCol = collection(firestoreDB ,'vehicles')
     try {
-      const doc = await vehiclesRef.add({data})
+      await addDoc(vehiclesCol, {data})
       // console.log('Documento escrito com id: ', doc.id)
     } catch (error) {
       console.error("Error adding document: ", error);
@@ -102,6 +101,15 @@ export default function Veiculos (){
         <p>{errors.type?.message}</p>
         <SelectTiposMarcas dataOptions={dataMarcas} control={control} name="brand"/>
         <p>{errors.brand?.message}</p>
+
+
+        <form>
+          <input type="file" name='image'  onSubmit={handleSubmitForm}/>
+          <button>+</button>
+        </form>
+
+
+
 
 
         <label>Modelo</label>
@@ -180,9 +188,10 @@ export default function Veiculos (){
         <label>Descrição</label>
         <textarea {...register("description")}/>
           <p>{errors.description?.message}</p>
-
+        <div>
         <button type="submit" >Inserir</button>
         <button>Excluir</button>
+        </div>
       </form>
     </div>
   )
